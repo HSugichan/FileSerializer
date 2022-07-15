@@ -16,7 +16,10 @@ namespace FileSerializer.JSON
     /// <typeparam name="T"></typeparam>
     public static class JsonToObject<T> where T : class//配列対応のためnew()はつけない
     {
-        private static readonly string _jsonFile = FileSerializer.CommonFileSystem.GetObjectFileName<T>("json");
+        /// <summary>
+        /// Default JSON file name.
+        /// </summary>
+        public static string DefaultFileName => FileSerializer.CommonFileSystem.GetObjectFileName<T>("json");
         /// <summary>
         /// Serialize to JSON file.
         /// </summary>
@@ -61,7 +64,7 @@ namespace FileSerializer.JSON
         /// </summary>
         /// <param name="instance"></param>
         /// <returns></returns>
-        public static bool Serialize(T instance) => Serialize(_jsonFile, instance);
+        public static bool Serialize(T instance) => Serialize(DefaultFileName, instance);
         /// <summary>
         /// Try to deserialize instance typed "T", from JSON file specified path
         /// </summary>
@@ -102,6 +105,6 @@ namespace FileSerializer.JSON
         /// </summary>
         /// <param name="instance"></param>
         /// <returns></returns>
-        public static bool TryDeserialize(out T instance) => TryDeserialize(_jsonFile, out instance);
+        public static bool TryDeserialize(out T instance) => TryDeserialize(DefaultFileName, out instance);
     }
 }

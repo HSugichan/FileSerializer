@@ -41,8 +41,10 @@ namespace FileSerializer.BIN
             Marshal.FreeHGlobal(ptr);
             return by;
         }
-
-        static readonly string _binName = CommonFileSystem.GetObjectFileName<T>("bin");
+        /// <summary>
+        /// Default BIN file name.
+        /// </summary>
+        public static string DefaultFileName { get; } = CommonFileSystem.GetObjectFileName<T>("bin");
 
         /// <summary>
         /// バイナリーファイルを読み取って
@@ -53,7 +55,7 @@ namespace FileSerializer.BIN
         /// <returns></returns>
         public static bool TryDeserialize(string path, out T structure)
         {
-            structure = new T();
+            structure = default;
 
             var file = new FileInfo(path);
 
@@ -73,7 +75,7 @@ namespace FileSerializer.BIN
         /// </summary>
         /// <param name="structure"></param>
         /// <returns></returns>
-        public static bool TryDeserialize(out T structure) => TryDeserialize(_binName, out structure);
+        public static bool TryDeserialize(out T structure) => TryDeserialize(DefaultFileName, out structure);
         /// <summary>
         /// 指定した型の構造体をバイナリーファイルに保存
         /// </summary>
@@ -87,6 +89,6 @@ namespace FileSerializer.BIN
         /// </summary>
         /// <param name="structure"></param>
         /// <returns></returns>
-        public static bool Serialize(T structure) => Serialize(_binName, structure);
+        public static bool Serialize(T structure) => Serialize(DefaultFileName, structure);
     }
 }

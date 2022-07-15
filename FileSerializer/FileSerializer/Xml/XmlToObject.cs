@@ -14,7 +14,10 @@ namespace FileSerializer.XML
     /// <typeparam name="T">インスタンスクラス</typeparam>
     public class XmlToObject<T> where T : class//, new()配列も対象にしたいためこの制約は無し
     {
-        private static readonly string _xmlFile = FileSerializer.CommonFileSystem.GetObjectFileName<T>("xml");
+        /// <summary>
+        /// Default XML file name.
+        /// </summary>
+        public static string DefaultFileName => FileSerializer.CommonFileSystem.GetObjectFileName<T>("xml");
         /// <summary>
         /// 指定クラスのオブジェクトをxmlに保存する
         /// </summary>
@@ -57,7 +60,7 @@ namespace FileSerializer.XML
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public static bool Serialize(T obj) => Serialize(_xmlFile, obj);
+        public static bool Serialize(T obj) => Serialize(DefaultFileName, obj);
         /// <summary>
         /// 指定クラスのオブジェクト(配列対応)をxmlから復元する
         /// </summary>
@@ -95,6 +98,6 @@ namespace FileSerializer.XML
         /// </summary>
         /// <param name="instance"></param>
         /// <returns></returns>
-        public static bool TryDeserialize(out T instance) => TryDeserialize(_xmlFile, out instance);
+        public static bool TryDeserialize(out T instance) => TryDeserialize(DefaultFileName, out instance);
     }
 }

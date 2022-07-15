@@ -12,7 +12,10 @@ namespace FileSerializer.INI
     /// <typeparam name="T">インスタンスクラス</typeparam>
     public static class IniToObject<T> where T : class, new()
     {
-        private static readonly string _iniFile = CommonFileSystem.GetIniFileName("ini");
+        /// <summary>
+        /// Default INI file name.
+        /// </summary>
+        public static string DefaultFileName => CommonFileSystem.GetIniFileName("ini");
         /// <summary>
         /// INIファイルからオブジェクトを生成
         /// セクション名はクラス名
@@ -29,7 +32,7 @@ namespace FileSerializer.INI
         /// <param name="instance">An object typed T</param>
         /// <returns>Success to deserialize</returns>
         public static bool TryDeserialize(out T instance)
-            => TryDeserialize(_iniFile, out instance);
+            => TryDeserialize(DefaultFileName, out instance);
         /// <summary>
         /// INIファイルからオブジェクトを生成
         /// </summary>
@@ -39,7 +42,7 @@ namespace FileSerializer.INI
         /// <returns></returns>
         public static bool TryDeserialize(string path, string section, out T instance)
         {
-            instance = new T();
+            instance = default;
             if (!File.Exists(path))
                 return false;
 
@@ -79,7 +82,7 @@ namespace FileSerializer.INI
         /// </summary>
         /// <param name="obj">An object typed T.</param>
         /// <returns></returns>
-        public static bool Serialize(T obj) => Serialize(_iniFile, obj);
+        public static bool Serialize(T obj) => Serialize(DefaultFileName, obj);
         /// <summary>
         /// オブジェクトの値をINIファイルに変換
         /// </summary>
