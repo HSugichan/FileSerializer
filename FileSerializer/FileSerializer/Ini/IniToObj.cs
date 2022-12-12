@@ -62,9 +62,7 @@ namespace FileSerializer.INI
             }
             catch (Exception e)
             {
-#if DEBUG
                 Debug.WriteLine($"Exception: {e.Message}\nStackTrace: {e.StackTrace}");
-#endif
                 return false;
             }
         }
@@ -109,9 +107,7 @@ namespace FileSerializer.INI
             }
             catch (Exception e)
             {
-#if DEBUG
                 Debug.WriteLine($"Exception: {e.Message}\nStackTrace: {e.StackTrace}");
-#endif
                 return false;
             }
         }

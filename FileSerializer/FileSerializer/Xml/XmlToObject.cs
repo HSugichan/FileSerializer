@@ -47,9 +47,7 @@ namespace FileSerializer.XML
             }
             catch (Exception e)
             {
-#if DEBUG
                 Debug.WriteLine($"Exception: {e.Message}\nStackTrace: {e.StackTrace}");
-#endif
                 return false;
             }
 
@@ -86,9 +84,7 @@ namespace FileSerializer.XML
             }
             catch (Exception e)
             {
-#if DEBUG
                 Debug.WriteLine($"Exception: {e.Message}\nStackTrace: {e.StackTrace}");
-#endif
                 return false;
             }
         }
