@@ -17,8 +17,12 @@ namespace FileSerializer.BIN
         /// <returns></returns>
         public static T Invert(byte[] buffer)
         {
+            var type = typeof(T);
+            if (buffer.Length < Marshal.SizeOf(type))
+                throw new Exception("Buffer contains uninitialized memory area.");
+
             GCHandle gch = GCHandle.Alloc(buffer, GCHandleType.Pinned);
-            T structIns = (T)Marshal.PtrToStructure(gch.AddrOfPinnedObject(), typeof(T));
+            T structIns = (T)Marshal.PtrToStructure(gch.AddrOfPinnedObject(), type);
             gch.Free();
 
             return structIns;
