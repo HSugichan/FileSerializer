@@ -18,7 +18,7 @@ namespace FileSerializer.BIN
         public static T Invert(byte[] buffer)
         {
             var type = typeof(T);
-            if (buffer.Length < Marshal.SizeOf(type))
+            if (Marshal.SizeOf(type) - buffer.Length >= 4)//Marshal.SizeOf(type)が4の倍数に切り上げられるため
                 throw new Exception("Buffer contains uninitialized memory area.");
 
             GCHandle gch = GCHandle.Alloc(buffer, GCHandleType.Pinned);
