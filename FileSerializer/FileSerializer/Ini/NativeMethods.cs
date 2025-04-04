@@ -8,7 +8,7 @@ namespace FileSerializer.INI
 
         private NativeMethods() { }
 
-        [DllImport("KERNEL32.DLL")]
+        [DllImport("KERNEL32.DLL", CharSet = CharSet.Unicode)]
         public static extern uint GetPrivateProfileString(string lpAppName, string lpKeyName, string lpDefault, StringBuilder lpReturnedString, uint nSize, string lpFileName);
 
         [DllImport("KERNEL32.DLL")]
